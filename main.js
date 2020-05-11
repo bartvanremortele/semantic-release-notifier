@@ -7,8 +7,8 @@ const showdown = require('showdown');
 const request = require("request");
 
 // E-mail string templates
-let SUBJECT_TEMPLATE = "New $REPO$ release: $NAME$ ($VERSION$)";
-let FOOTER_TEMPLATE = "\n\n## Where to find the release?\n\n[Visit the release page]($RELEASEURL$)\n\n## Found a bug?\n\n [Open a new issue in our repo]($NEWISSUEURL$)";
+const SUBJECT_TEMPLATE = "New $REPO$ release: $NAME$ ($VERSION$)";
+const FOOTER_TEMPLATE = "\n\n## Where to find the release?\n\n[Visit the release page]($RELEASEURL$)\n\n## Found a bug?\n\n [Open a new issue in our repo]($NEWISSUEURL$)";
 
 
 let setCredentials = function () {
@@ -37,14 +37,14 @@ let prepareMessage = async (recipients, release) => {
   const newIssueURL = repository.html_url + "/issues/new";
 
   // This is not efficient but I find it quite readable
-  const emailSubject = SUBJECT_TEMPLATE
+  let emailSubject = SUBJECT_TEMPLATE
     .replace("$REPO$", repoName)
     .replace("$VERSION$", releaseVersion)
-    .replace("$NAME$", releaseName),
+    .replace("$NAME$", releaseName);
 
-  const footer = FOOTER_TEMPLATE
+  let footer = FOOTER_TEMPLATE
     .replace("$RELEASEURL$", releaseURL)
-    .replace("$NEWISSUEURL$", newIssueURL),
+    .replace("$NEWISSUEURL$", newIssueURL);
 
   const releaseBody = converter.makeHtml(release.body + footer)
 
