@@ -89,8 +89,10 @@ let getRecipients = async (recipients_url, callback) => {
   return body.split(/\r\n|\n|\r/);
 }
 
-setCredentials()
-const recipients = await getRecipients(process.env.RECIPIENTS);
-const release = await fetchRelease();
-const message = await prepareMessage(recipients, release);
-await sendEmails(message);
+(async () => {
+  setCredentials()
+  const recipients = await getRecipients(process.env.RECIPIENTS);
+  const release = await fetchRelease();
+  const message = await prepareMessage(recipients, release);
+  await sendEmails(message);
+})();
