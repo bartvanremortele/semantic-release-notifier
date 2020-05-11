@@ -7,8 +7,8 @@ const showdown = require('showdown');
 const request = require("request");
 
 // E-mail string templates
-const SUBJECT_TEMPLATE = "New $REPO$ release: $NAME$ ($VERSION$)";
-const FOOTER_TEMPLATE = "\n\n## Where to find the release?\n\n[Visit the release page]($RELEASEURL$)\n\n## Found a bug?\n\n [Open a new issue in our repo]($NEWISSUEURL$)";
+let SUBJECT_TEMPLATE = "New $REPO$ release: $NAME$ ($VERSION$)";
+let FOOTER_TEMPLATE = "\n\n## Where to find the release?\n\n[Visit the release page]($RELEASEURL$)\n\n## Found a bug?\n\n [Open a new issue in our repo]($NEWISSUEURL$)";
 
 
 let setCredentials = function () {
@@ -18,7 +18,7 @@ let setCredentials = function () {
 const fetchRelease = async () => {
   const context = github.context;
   const { data: releases } = await Octokit.repos.listReleases({
-    ...context.repo,
+    ...context.repo
   });
 
   const latestRelease = releases[0];
