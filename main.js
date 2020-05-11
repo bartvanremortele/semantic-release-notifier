@@ -16,6 +16,10 @@ const setCredentials = () => sgMail.setApiKey(process.env.SENDGRID_API_TOKEN);
 
 const fetchRelease = async () => {
   const context = github.context;
+
+  core.debug('Using context:');
+  core.debug(context);
+
   const { data: releases } = await octokit.repos.listReleases({
     ...context.repo
   });
