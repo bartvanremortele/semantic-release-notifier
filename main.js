@@ -94,6 +94,4 @@ async function run() {
   }
 }
 
-(async () => {
-
-})();
+run();
