@@ -20,6 +20,9 @@ const fetchRelease = async () => {
     ...context.repo
   });
 
+  core.debug('Retrieved releases:');
+  core.debug(releases);
+
   const latestRelease = releases[0];
   core.setOutput('release', latestRelease);
 
@@ -75,11 +78,22 @@ const getRecipients = async (recipients_url) => {
   return data.split(/\r\n|\n|\r/);
 }
 
+async function run() {
+  try {
+    setCredentials()
+    const recipients = await getRecipients(process.env.RECIPIENTS);
+    const release = await fetchRelease();
+    core.debug('Found release:');
+    core.debug(release);
+    const message = await prepareMessage(recipients, release);
+    await sendEmails(message);
+    console.log("Mail sent!");
+  }
+  catch (error) {
+    core.setFailed(error.message);
+  }
+}
+
 (async () => {
-  setCredentials()
-  const recipients = await getRecipients(process.env.RECIPIENTS);
-  const release = await fetchRelease();
-  const message = await prepareMessage(recipients, release);
-  await sendEmails(message);
-  console.log("Mail sent!");
+
 })();
