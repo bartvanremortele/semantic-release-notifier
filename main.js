@@ -54,12 +54,11 @@ const prepareMessage = async (recipients, release) => {
 
   const releaseBody = converter.makeHtml(release.body + footer);
 
+  const sender = process.env.SENDER_EMAIL;
+
   let msg = {
-    to: ['subscribers@no-reply.com'],
-    from: {
-      name: 'GitHub Releases',
-      email: 'no-reply@no-reply.com'
-    },
+    from: sender,
+    to: sender,
     bcc: recipients,
     subject: emailSubject,
     html: releaseBody
