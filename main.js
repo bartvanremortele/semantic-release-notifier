@@ -18,7 +18,7 @@ const fetchRelease = async () => {
   const context = github.context;
 
   core.debug('Using context:');
-  core.debug(context);
+  core.debug(context.repo);
 
   const { data: releases } = await octokit.repos.listReleases({
     ...context.repo
