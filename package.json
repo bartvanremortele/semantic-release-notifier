@@ -6,8 +6,8 @@
     "@actions/core": "^1.2.4",
     "@actions/github": "^2.2.0",
     "@sendgrid/mail": "^6.3.1",
+    "axios": "^0.19.2",
     "octokit": "^1.0.0-hello-world",
-    "request": "^2.88.0",
     "showdown": "^1.9.1"
   }
 }

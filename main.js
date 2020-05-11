@@ -4,7 +4,7 @@ const core = require('@actions/core');
 const { Octokit } = require("@octokit/rest");
 const sgMail = require('@sendgrid/mail');
 const showdown = require('showdown');
-const request = require("request");
+const axios = require("axios");
 
 // E-mail string templates
 const SUBJECT_TEMPLATE = "New $REPO$ release: $NAME$ ($VERSION$)";
@@ -65,26 +65,17 @@ const prepareMessage = async (recipients, release) => {
 const sendEmails = async (msg) => {
   try {
     await sgMail.send(msg);
-
-    console.log("Mail sent!");
   } catch (error) {
-
     //Log friendly error
-    console.error(error.toString())
-
-    //Extract error msg
-    const { message, code, response } = error
-
-    //Extract response msg
-    const { headers, body } = response
+    console.error(error.toString());
   }
 
 }
 
 
 
-const getRecipients = async (recipients_url, callback) => {
-  const body = await request.get(recipients_url);
+const getRecipients = async (recipients_url) => {
+  const body = await axios.get(recipients_url);
 
   return body.split(/\r\n|\n|\r/);
 }
@@ -95,4 +86,5 @@ const getRecipients = async (recipients_url, callback) => {
   const release = await fetchRelease();
   const message = await prepareMessage(recipients, release);
   await sendEmails(message);
+  console.log("Mail sent!");
 })();
