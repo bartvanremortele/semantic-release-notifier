@@ -9,7 +9,7 @@ const octokit = new Octokit();
 
 // E-mail string templates
 const SUBJECT_TEMPLATE = "New $REPO$ release: $NAME$ ($VERSION$)";
-const FOOTER_TEMPLATE = "\n\n## Where to find the release?\n\n[Visit the release page]($RELEASEURL$)\n\n## Found a bug?\n\n [Open a new issue in our repo]($NEWISSUEURL$)";
+// const FOOTER_TEMPLATE = "\n\n## Where to find the release?\n\n[Visit the release page]($RELEASEURL$)\n\n## Found a bug?\n\n [Open a new issue in our repo]($NEWISSUEURL$)";
 
 
 const setCredentials = () => sgMail.setApiKey(process.env.SENDGRID_API_TOKEN);
@@ -48,11 +48,11 @@ const prepareMessage = async (recipients, release) => {
     .replace("$VERSION$", releaseVersion)
     .replace("$NAME$", releaseName);
 
-  let footer = FOOTER_TEMPLATE
-    .replace("$RELEASEURL$", releaseURL)
-    .replace("$NEWISSUEURL$", newIssueURL);
+  // let footer = FOOTER_TEMPLATE
+  //   .replace("$RELEASEURL$", releaseURL)
+  //   .replace("$NEWISSUEURL$", newIssueURL);
 
-  const releaseBody = converter.makeHtml(release.body + footer);
+  const releaseBody = converter.makeHtml(emailSubject + '\n\n' + release.body);
 
   const sender = process.env.SENDER_EMAIL;
 
