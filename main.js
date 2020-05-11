@@ -11,7 +11,7 @@ const SUBJECT_TEMPLATE = "New $REPO$ release: $NAME$ ($VERSION$)";
 const FOOTER_TEMPLATE = "\n\n## Where to find the release?\n\n[Visit the release page]($RELEASEURL$)\n\n## Found a bug?\n\n [Open a new issue in our repo]($NEWISSUEURL$)";
 
 
-let setCredentials = function () {
+const setCredentials = function () {
   sgMail.setApiKey(process.env.SENDGRID_API_TOKEN)
 }
 
@@ -27,7 +27,7 @@ const fetchRelease = async () => {
   return latestRelease;
 }
 
-let prepareMessage = async (recipients, release) => {
+const prepareMessage = async (recipients, release) => {
   const context = github.context;
   const converter = new showdown.Converter();
   const repoName = context.repo.repo;
@@ -46,7 +46,7 @@ let prepareMessage = async (recipients, release) => {
     .replace("$RELEASEURL$", releaseURL)
     .replace("$NEWISSUEURL$", newIssueURL);
 
-  const releaseBody = converter.makeHtml(release.body + footer)
+  const releaseBody = converter.makeHtml(release.body + footer);
 
   let msg = {
     to: ['subscribers@no-reply.com'],
@@ -59,10 +59,10 @@ let prepareMessage = async (recipients, release) => {
     html: releaseBody
   };
 
-  return msg
+  return msg;
 }
 
-sendEmails = async (msg) => {
+const sendEmails = async (msg) => {
   try {
     await sgMail.send(msg);
 
@@ -83,7 +83,7 @@ sendEmails = async (msg) => {
 
 
 
-let getRecipients = async (recipients_url, callback) => {
+const getRecipients = async (recipients_url, callback) => {
   const body = await request.get(recipients_url);
 
   return body.split(/\r\n|\n|\r/);
