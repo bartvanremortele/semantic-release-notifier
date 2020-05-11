@@ -5,6 +5,7 @@ const { Octokit } = require("@octokit/rest");
 const sgMail = require('@sendgrid/mail');
 const showdown = require('showdown');
 const axios = require("axios");
+const octokit = new Octokit();
 
 // E-mail string templates
 const SUBJECT_TEMPLATE = "New $REPO$ release: $NAME$ ($VERSION$)";
@@ -15,7 +16,7 @@ const setCredentials = () => sgMail.setApiKey(process.env.SENDGRID_API_TOKEN);
 
 const fetchRelease = async () => {
   const context = github.context;
-  const { data: releases } = await Octokit.repos.listReleases({
+  const { data: releases } = await octokit.repos.listReleases({
     ...context.repo
   });
 
