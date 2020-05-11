@@ -71,7 +71,7 @@ const sendEmails = async (msg) => {
   try {
     await sgMail.send(msg);
   } catch (error) {
-    //Log friendly error
+    core.setFailed(error.message);
     console.error(error.toString());
   }
 }
