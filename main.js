@@ -18,7 +18,7 @@ let setCredentials = function () {
 
 const fetchRelease = async () => {
   const context = github.context;
-  const { data: releases } = await octokit.repos.listReleases({
+  const { data: releases } = await Octokit.repos.listReleases({
     ...context.repo,
   });
 
