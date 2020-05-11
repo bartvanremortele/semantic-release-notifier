@@ -40,7 +40,7 @@ const prepareMessage = async (recipients, release) => {
   const releaseVersion = release.tag_name;
   const releaseName = release.name;
   const releaseURL = release.html_url;
-  const newIssueURL = context.repository.html_url + "/issues/new";
+  const newIssueURL = context.payload.repository.html_url + "/issues/new";
 
   // This is not efficient but I find it quite readable
   let emailSubject = SUBJECT_TEMPLATE
