@@ -2,14 +2,13 @@
 const github = require('@actions/github');
 const core = require('@actions/core');
 const { Octokit } = require("@octokit/rest");
-const sgMail = require('@sendgrid/mail'),
-  showdown = require('showdown'),
-  fs = require('fs'),
-  request = require("request")
+const sgMail = require('@sendgrid/mail');
+const showdown = require('showdown');
+const request = require("request");
 
 // E-mail string templates
-const SUBJECT_TEMPLATE = "New $REPO$ release: $NAME$ ($VERSION$)",
-  FOOTER_TEMPLATE = "\n\n## Where to find the release?\n\n[Visit the release page]($RELEASEURL$)\n\n## Found a bug?\n\n [Open a new issue in our repo]($NEWISSUEURL$)"
+const SUBJECT_TEMPLATE = "New $REPO$ release: $NAME$ ($VERSION$)";
+const FOOTER_TEMPLATE = "\n\n## Where to find the release?\n\n[Visit the release page]($RELEASEURL$)\n\n## Found a bug?\n\n [Open a new issue in our repo]($NEWISSUEURL$)";
 
 
 let setCredentials = function () {
@@ -30,12 +29,12 @@ const fetchRelease = async () => {
 
 let prepareMessage = async (recipients, release) => {
   const context = github.context;
-  const converter = new showdown.Converter(),
-    repoName = context.repo.repo,
-    releaseVersion = release.tag_name,
-    releaseName = release.name,
-    releaseURL = release.html_url,
-    newIssueURL = repository.html_url + "/issues/new";
+  const converter = new showdown.Converter();
+  const repoName = context.repo.repo;
+  const releaseVersion = release.tag_name;
+  const releaseName = release.name;
+  const releaseURL = release.html_url;
+  const newIssueURL = repository.html_url + "/issues/new";
 
   // This is not efficient but I find it quite readable
   const emailSubject = SUBJECT_TEMPLATE
