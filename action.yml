@@ -1,0 +1,11 @@
+name: "Semantic release email notification"
+description: "Get the latest release from this repository and send an e-mail notification using sendgrid"
+branding:
+  icon: "anchor"
+  color: "orange"
+outputs:
+  release:
+    description: "Latest release"
+runs:
+  using: "node12"
+  main: "main.js"

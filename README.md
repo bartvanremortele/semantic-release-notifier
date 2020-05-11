@@ -1,3 +1,10 @@
+https://help.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token
+https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables
+https://github.com/octokit/octokit.js
+https://github.com/pozetroninc/github-action-get-latest-release/blob/master/main.js
+https://developer.github.com/v3/repos/releases/
+https://github.com/actions/checkout
+
 ## release-notify-action
 
 This repo contains a re-usable GitHub Action that when installed sends an e-mail to a distribution list with the release note contents every time a GitHub Release is created for the repository.
@@ -7,9 +14,10 @@ This Action makes use of [SendGrid's](https://sendgrid.com/) API to send the e-m
 ## Pre-requisites
 
 To run this action you'll need:
- - To be part of the [Actions beta](https://github.com/features/actions). Note that during the beta, Actions will only run on private repositories.
- - A [**SendGrid API Key**](https://sendgrid.com/docs/ui/account-and-settings/api-keys/). _SendGrid is [free to up 100 e-mails a day](https://sendgrid.com/pricing/) so feel free to register and get your API KEY._
- - **A text file hosted anywhere** with the list of e-mail recipients. _I personally use [GitHub Gists](https://gist.github.com) and get the link of the raw file._
+
+- To be part of the [Actions beta](https://github.com/features/actions). Note that during the beta, Actions will only run on private repositories.
+- A [**SendGrid API Key**](https://sendgrid.com/docs/ui/account-and-settings/api-keys/). _SendGrid is [free to up 100 e-mails a day](https://sendgrid.com/pricing/) so feel free to register and get your API KEY._
+- **A text file hosted anywhere** with the list of e-mail recipients. _I personally use [GitHub Gists](https://gist.github.com) and get the link of the raw file._
 
 ## Setup
 
@@ -24,7 +32,6 @@ Add a new workflow to your `.github/main.workflow` to trigger on `release`.
 Create an action that uses this repository `bitoiu/release-notify-action@master` or points to Docker Hub at `docker://bitoiu/release-notifiy-action`
 
 <img src="https://user-images.githubusercontent.com/1192590/47112720-11578d80-d24f-11e8-968d-bb3de5831ce8.png" alt="new-action" width="300" />
-
 
 ### 3. Set the SendGrid secret
 

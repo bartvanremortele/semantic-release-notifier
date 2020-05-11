@@ -1,0 +1,13 @@
+{
+  "name": "semantic-release-notify-action",
+  "version": "0.0.1",
+  "description": "Semantic release notifier Action",
+  "dependencies": {
+    "@actions/core": "^1.2.4",
+    "@actions/github": "^2.2.0",
+    "@sendgrid/mail": "^6.3.1",
+    "octokit": "^1.0.0-hello-world",
+    "request": "^2.88.0",
+    "showdown": "^1.9.1"
+  }
+}
