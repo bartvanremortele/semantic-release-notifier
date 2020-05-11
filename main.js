@@ -11,9 +11,7 @@ const SUBJECT_TEMPLATE = "New $REPO$ release: $NAME$ ($VERSION$)";
 const FOOTER_TEMPLATE = "\n\n## Where to find the release?\n\n[Visit the release page]($RELEASEURL$)\n\n## Found a bug?\n\n [Open a new issue in our repo]($NEWISSUEURL$)";
 
 
-const setCredentials = function () {
-  sgMail.setApiKey(process.env.SENDGRID_API_TOKEN)
-}
+const setCredentials = () => sgMail.setApiKey(process.env.SENDGRID_API_TOKEN);
 
 const fetchRelease = async () => {
   const context = github.context;
@@ -69,15 +67,11 @@ const sendEmails = async (msg) => {
     //Log friendly error
     console.error(error.toString());
   }
-
 }
 
-
-
 const getRecipients = async (recipients_url) => {
-  const body = await axios.get(recipients_url);
-
-  return body.split(/\r\n|\n|\r/);
+  const { data } = await axios.get(recipients_url);
+  return data.split(/\r\n|\n|\r/);
 }
 
 (async () => {
