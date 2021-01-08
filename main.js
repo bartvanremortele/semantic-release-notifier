@@ -1,7 +1,7 @@
 // External dependencies
 const github = require('@actions/github');
 const core = require('@actions/core');
-const { Octokit } = require("@octokit/rest");
+const { Octokit } = require("@octokit/action");
 const sgMail = require('@sendgrid/mail');
 const showdown = require('showdown');
 const axios = require("axios");
