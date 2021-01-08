@@ -7,7 +7,7 @@
     "@actions/github": "^2.2.0",
     "@octokit/action": "^3.1.6",
     "@sendgrid/mail": "^6.3.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "octokit": "^1.0.0-hello-world",
     "showdown": "^1.9.1"
   }
