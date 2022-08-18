@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Semantic release notifier Action",
   "dependencies": {
-    "@actions/core": "^1.2.4",
+    "@actions/core": "^1.9.1",
     "@actions/github": "^2.2.0",
     "@octokit/action": "^3.1.6",
     "@sendgrid/mail": "^6.3.1",
